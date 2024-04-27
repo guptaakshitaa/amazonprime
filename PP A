@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_ITEMS 100
+#define MAX_TITLE_LENGTH 100
+#define MAX_DESCRIPTION_LENGTH 500
+
+typedef struct {       //represent a video animation
+    char title[MAX_TITLE_LENGTH];
+    char description[MAX_DESCRIPTION_LENGTH];
+    float rating;
+    int year;
+    int duration_minutes;
+} VideoItem;
+
+void displayMainMenu() {        //display the main menu
+    printf("\n=== Amazon Prime ===\n");
+    printf("1. Browse Videos\n");
+    printf("2. Search\n");
+    printf("3. My Watchlist\n");
+    printf("4. Exit\n");
+}
+
+void displayVideoList(VideoItem videos[], int count) {         // display videos post search result query 
+    printf("\n=== Video List ===\n");
+    for (int i = 0; i < count; ++i) {
+        printf("%d. %s (%d)\n", i + 1, videos[i].title, videos[i].year);
+    }
+}
+
+void browseVideos() {
+    VideoItem videos[MAX_ITEMS] = {   //search results
+        {9.3, 1994, 142},
+       
+        
+    };
+    int numVideos = 2; 
+    
+    displayVideoList(videos, numVideos);
+}
+
+void searchVideos() {
+    printf("\n=== Search Videos ===\n");        //simulating search query
+    printf("Enter search query: ");
+    char query[100];
+    scanf("%s", query); 
+    printf("Searching for '%s'...\n", query);
+    printf("No results found.\n");
+}
+
+void myWatchlist() {                //simulating the user's watchlist
+    printf("\n=== My Watchlist ===\n");
+    printf("You have no videos in your watchlist.\n");
+}
+
+int main() {
+    int choice;
+    
+    do {
+        displayMainMenu();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1:
+                browseVideos();
+                break;
+            case 2:
+                searchVideos();
+                break;
+            case 3:
+                myWatchlist();
+                break;
+            case 4:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 4);
+    
+    return 0;
+}
